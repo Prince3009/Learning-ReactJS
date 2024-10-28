@@ -1,8 +1,9 @@
+//Concept of props and how to use props
 import React from 'react'
 import PropTypes from 'prop-types'
 
 
-export default function Navbar(props) {                //using props concept
+export default function Navbar(props) {               
   return (
     <>
     <nav>
