@@ -25,6 +25,11 @@ export default function TextForm(props) {
     setText(newText);
   }
 
+  //Using regex pattern
+  const handleSpaces = () => {
+    const newText = text.replace(/\s+/g, " ");
+    setText(newText);
+  }
   // Declare a state variable 'text' and a function 'setText' to update it
   const [text, setText] = useState('');                    
   return (
@@ -38,6 +43,7 @@ export default function TextForm(props) {
         <button className="btn btn-primary mx-2" onClick={handleUppercaseClick}>Convert to UPPERCASE</button>
         <button className="btn btn-primary mx-2" onClick={handleLowercaseClick}>Convert to lowercase</button>
         <button className="btn btn-primary mx-2" onClick={handleClearClick}>Clear text</button>
+        <button className="btn btn-primary mx-2" onClick={handleSpaces}>Remove extra spaces</button>
 
         
     </div>
