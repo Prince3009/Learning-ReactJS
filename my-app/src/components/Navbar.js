@@ -1,6 +1,8 @@
 //Concept of props and how to use props
 import React from 'react'
-//import PropTypes from 'prop-types'
+//import PropTypes from 'prop-types'              // Uncomment if using PropTypes for type-checking props
+
+// Navbar component receives `mode` and `toggleMode` props to control appearance and theme-switch functionality
 
 
 export default function Navbar(props) {               
