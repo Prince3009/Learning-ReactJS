@@ -10,7 +10,7 @@ export default function Navbar(props) {
     <>
     <nav className={`navbar navbar-expand-lg navbar-${props.mode} bg-${props.mode}`}>           
     <div className="container-fluid">
-        <a className="navbar-brand" href="/">MyWebsite</a>             {/*if href="#" is given then then change it to href="/" */}
+        <a className="navbar-brand" href="/">TextChanger</a>             {/*if href="#" is given then then change it to href="/" */}
         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
         </button>

@@ -13,22 +13,27 @@ export default function TextForm(props) {
   const handleUppercaseClick = () => {
     const newText = text.toUpperCase();
     setText(newText);
+    props.showAlert("Converted to uppercase", "success");   //Show alert after text converted to uppercase
   }
 
   const handleLowercaseClick = () => {
     const newText = text.toLowerCase();
     setText(newText);
+    props.showAlert("Converted to lowercase", "success");
   }
 
   const handleClearClick = () => {
     const newText = "";
     setText(newText);
+    props.showAlert("Cleared", "success");         
   }
 
   //Using regex pattern
   const handleSpaces = () => {
     const newText = text.replace(/\s+/g, " ");
     setText(newText);
+    props.showAlert("Spaces removed", "success");
+
   }
   // Declare a state variable 'text' and a function 'setText' to update it
   const [text, setText] = useState('');                    
