@@ -2,9 +2,11 @@
 import React from 'react'
 //import PropTypes from 'prop-types'              // Uncomment if using PropTypes for type-checking props
 
+
+// Importing Link from react-router-dom for navigation without page reloads
+import { Link } from 'react-router-dom'
+
 // Navbar component receives `mode` and `toggleMode` props to control appearance and theme-switch functionality
-
-
 export default function Navbar(props) {               
   return (
     <>
@@ -17,10 +19,13 @@ export default function Navbar(props) {
         <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav ">
                 <li className="nav-item">
-                    <a className="nav-link active" aria-current="page" href="/">Home</a>
+                    {/* Linking to the Home page with reacter-router-dom*/}
+                    {/* The Link component from react-router-dom replaces traditional <a> tags and href to 'to=' for client-side navigation. Use to="/" for the home page and to="/about" for the About page. */}
+                    <Link className="nav-link active" aria-current="page" to="/">Home</Link>
                 </li>
                 <li className="nav-item">
-                    <a className="nav-link" href="/">About</a>
+                    {/* Linking to the About page with reacter-router-dom*/}
+                    <Link className="nav-link" to="/about">About</Link>
                 </li>
                 <li className="nav-item">
                     <a className="nav-link" href="/">Services</a>

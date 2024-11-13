@@ -30,7 +30,7 @@ function App() {
   const toggleMode = () => {
     if(mode === 'light'){
       setMode('dark');
-      document.body.style.backgroundColor = 'grey';
+      document.body.style.backgroundColor = 'rgb(54 102 141)';
       showAlert('Dark mode has been enabled', "success");    //message, type
       //document.title = 'TextChanger - DarkMode';             //When dark mode enabled then the title of the page changes to 'TextChanger - DarkMode'
       
@@ -63,7 +63,7 @@ function App() {
   <div className="container">  
   <Routes>
     <Route path="/" element={<TextForm heading="Enter your text below" showAlert={showAlert}/> } />
-    <Route path="/about" element={ <About/> } />
+    <Route path="/about" element={ <About mode={mode} /> } />
   </Routes>  
   </div>
   </Router>

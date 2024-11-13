@@ -9,11 +9,15 @@ export default function Alert(props) {
   }
   
   return (
-    // Conditional rendering: display alert only if props.alert is not null
-    props.alert &&  <div className={`alert alert-${props.alert.type} alert-dismissible fade show`} role="alert">
+    // Container div with fixed height to maintain layout consistency
+    <div style={{height : '65px'}}>       
+
+    {/* Conditional rendering: display alert only if props.alert is not null */}
+    { props.alert &&  <div className={`alert alert-${props.alert.type} alert-dismissible fade show`} role="alert">
       <strong>{captitalize(props.alert.type)}</strong>: {props.alert.msg}
 
         {/* <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close"></button> */}
+      </div>}
       </div>
     
   )

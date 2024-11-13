@@ -1,19 +1,23 @@
 //Using mutiple states
-import React, {useState} from 'react'
+// import React, {useState} from 'react'
 
-export default function About() {
+export default function About(props) {
 
     // State for the styling of the component, starting with light mode colors
-    const [myStyle, setMyStyle] = useState({
-      color: 'black',
-      backgroundColor: 'white'
-  });
+    //const [myStyle, setMyStyle] = useState({
+  //     color: 'black',
+  //     backgroundColor: 'white'
+  // });
     
+  let myStyle = {
+    color: props.mode === 'dark' ? 'white': '#042743',
+    backgroundColor: props.mode === 'dark' ? 'rgb(36 74 104)' : 'white'
+  }
   // State for the button text, starting with "Enable Dark Mode"
-  const [btnText, setBtnText] = useState('Enable Dark Mode');
+  // const [btnText, setBtnText] = useState('Enable Dark Mode');
   
   // Function to toggle between Dark Mode and Light Mode
-  const toggleMode = () => {
+  /* const toggleMode = () => {
     if(myStyle.color === 'black') {
       setMyStyle({
         color: 'white',
@@ -30,6 +34,7 @@ export default function About() {
       setBtnText('Enable Dark Mode');
     }
   }
+    */
   return (
     <div className='container m-2' style={myStyle}>
       <div className="accordion" id="accordionExample">
@@ -40,7 +45,7 @@ export default function About() {
             </button>
             </h2>
             <div id="collapseOne" className="accordion-collapse collapse show" data-bs-parent="#accordionExample">
-            <div className="accordion-body">
+            <div className="accordion-body" >
                 <strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to myStyle each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
             </div>
             </div>
@@ -70,9 +75,9 @@ export default function About() {
           </div>
         </div>
       </div>
-      <div className='container my-3'>
+      {/* <div className='container my-3'>
         <button className="btn btn-primary" onClick={toggleMode}>{btnText}</button>
-      </div>
+      </div> */}
     </div>
   )
 }
