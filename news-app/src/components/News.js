@@ -23,7 +23,7 @@ export default class News extends Component {
         <h2>NewsSnap - Top Headlines</h2>
         <div className='row'>
         {this.state.articles.map((element)=>{
-          return <div className="className col-md-4"  key={element.url}>
+          return <div className="className col-lg-4"  key={element.url}>
             <NewsItem title={element.title ? element.title.slice(0,45) : element.title} description={element.description ? element.description.slice(0,88) : element.description} imageUrl={element.urlToImage} newsUrl={element.url} />
           </div>
           })}
