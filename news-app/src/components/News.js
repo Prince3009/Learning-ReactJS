@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import NewsItem from './NewsItem'
+import Spinner from './Spinner'
+
 
 export default class News extends Component {
 
@@ -7,30 +9,55 @@ export default class News extends Component {
     super();
     this.state = {
       articles : [],
-      loading: false
+      loading: false,
+      page: 1
     }
   }
 
   async componentDidMount(){
-    let url = "https://newsapi.org/v2/top-headlines?country=us&apiKey=a044473279b8453db9ade7b3f2021bd3";
+    let url = `https://newsapi.org/v2/top-headlines?country=us&apiKey=a044473279b8453db9ade7b3f2021bd3&pageSize=${this.props.pageSize}`;
+    this.setState({loading: true});
     let data = await fetch(url);
     let parsedData = await data.json();
-    this.setState({ articles: parsedData.articles, loading: false });
+    this.setState({ articles: parsedData.articles, loading: false, totalArticles: parsedData.totalResults});
+  }
+
+  handlePrevClick = async () => {
+    let url = `https://newsapi.org/v2/top-headlines?country=us&apiKey=a044473279b8453db9ade7b3f2021bd3&page=${this.state.page - 1}&pageSize=${this.props.pageSize}`;
+    this.setState({loading: true});
+    let data = await fetch(url);
+    let parsedData = await data.json();
+    this.setState({ articles: parsedData.articles, loading: false, page: this.state.page - 1 });
+
+  }
+
+  handleNextClick = async () => {
+ 
+      let url = `https://newsapi.org/v2/top-headlines?country=us&apiKey=a044473279b8453db9ade7b3f2021bd3&page=${this.state.page + 1}&pageSize=${this.props.pageSize}`;
+      this.setState({loading: true});
+      let data = await fetch(url);
+      let parsedData = await data.json();
+      this.setState({ articles: parsedData.articles, loading: false, page: this.state.page + 1 });
+  
+
   }
   render() {
+    const totalPages = Math.ceil(this.state.totalArticles/this.props.pageSize);
+
     return (
       <div className='container my-3'>
-        <h2>NewsSnap - Top Headlines</h2>
+        <h1 className='text-center'>NewsSnap - Top Headlines</h1>
+        {this.state.loading && <Spinner/>}
         <div className='row'>
-        {this.state.articles.map((element)=>{
+        {!this.state.loading && this.state.articles.map((element)=>{
           return <div className="className col-lg-4"  key={element.url}>
             <NewsItem title={element.title ? element.title.slice(0,45) : element.title} description={element.description ? element.description.slice(0,88) : element.description} imageUrl={element.urlToImage} newsUrl={element.url} />
           </div>
           })}
         </div>
         <div className='conatiner d-flex justify-content-between'>
-        <button type="button" class="btn btn-primary" m-10>&larr; Previous</button>                {/* &larr and &rarr used for arrows in previos and next button */}
-        <button type="button" class="btn btn-primary" m-10>Next &rarr;</button>
+        <button disabled={this.state.page <= 1} type="button" className="btn btn-primary" onClick={this.handlePrevClick}>&larr; Previous</button>                {/* &larr and &rarr used for arrows in previos and next button */}
+        <button disabled={this.state.page >= totalPages} type="button" className="btn btn-primary" onClick={this.handleNextClick}>Next &rarr;</button>
         </div>
       </div>
     )
