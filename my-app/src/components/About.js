@@ -83,192 +83,72 @@
 // }
 
 
-import React, { useState } from 'react';
+import React from 'react';
 
-export default function About(props) {
-  // Dynamic styling based on the mode
-  let myStyle = {
-    color: props.mode === 'dark' ? 'white' : '#042743',
-    backgroundColor: props.mode === 'dark' ? 'rgb(36 74 104)' : 'white',
-    border: props.mode === 'dark' ? '1px solid white' : '1px solid #ccc',
-  };
-
-  // State for comments
-  const [comments, setComments] = useState([]);
-  const [newComment, setNewComment] = useState('');
-
-  // Handle adding a new comment
-  const handleAddComment = () => {
-    if (newComment.trim() !== '') {
-      setComments([...comments, newComment]);
-      setNewComment('');
-    }
-  };
-
+export default function About() {
   return (
-    <div className="container my-4 p-4 rounded" style={myStyle}>
-      <h2 className="text-center mb-4">About Text Changer</h2>
-      <div className="accordion" id="accordionExample">
-        {/* Uppercase Conversion */}
-        <div className="accordion-item" style={myStyle}>
-          <h2 className="accordion-header">
-            <button
-              className="accordion-button"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#collapseOne"
-              aria-expanded="true"
-              aria-controls="collapseOne"
-              style={myStyle}
-            >
-              Convert Text to Uppercase
-            </button>
-          </h2>
-          <div
-            id="collapseOne"
-            className="accordion-collapse collapse show"
-            data-bs-parent="#accordionExample"
-          >
-            <div className="accordion-body">
-              <strong>Convert your text to uppercase with a single click!</strong>
-              This feature is perfect for making your text stand out or adhering
-              to formatting rules. Simply type or paste your text and let our
-              tool do the rest.
-            </div>
-          </div>
-        </div>
+    <div className="container my-1">
+      <header className="about-hero p-4 rounded surface">
+        <h1 className="display-6 mb-2">About This App</h1>
+        <p className="lead text-secondary mb-0">Text Changer is a small, friendly web app built to help you quickly manipulate and format text directly in your browser — no account or signup required.</p>
+      </header>
 
-        {/* Lowercase Conversion */}
-        <div className="accordion-item" style={myStyle}>
-          <h2 className="accordion-header">
-            <button
-              className="accordion-button collapsed"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#collapseTwo"
-              aria-expanded="false"
-              aria-controls="collapseTwo"
-              style={myStyle}
-            >
-              Convert Text to Lowercase
-            </button>
-          </h2>
-          <div
-            id="collapseTwo"
-            className="accordion-collapse collapse"
-            data-bs-parent="#accordionExample"
-          >
-            <div className="accordion-body">
-              <strong>Transform your text to lowercase effortlessly.</strong>
-              This feature is ideal for maintaining consistency in text formatting,
-              especially for emails or informal documents.
-            </div>
-          </div>
-        </div>
+      <section className="mt-4 p-3 surface rounded">
+        <h2 className="h5">What this app does</h2>
+        <p className="text-secondary">It lets you transform any text in a few clicks: change case, remove extra spaces, reverse text, count words and characters, copy results, and more. Everything runs in your browser so your text stays private.</p>
+      </section>
 
-        {/* Clear Text */}
-        <div className="accordion-item" style={myStyle}>
-          <h2 className="accordion-header">
-            <button
-              className="accordion-button collapsed"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#collapseThree"
-              aria-expanded="false"
-              aria-controls="collapseThree"
-              style={myStyle}
-            >
-              Clear Text
-            </button>
-          </h2>
-          <div
-            id="collapseThree"
-            className="accordion-collapse collapse"
-            data-bs-parent="#accordionExample"
-          >
-            <div className="accordion-body">
-              <strong>Clear all text in an instant.</strong> With one click, you can
-              remove all content from the input field, making it easy to start fresh
-              without manual deletion.
-            </div>
-          </div>
-        </div>
+      <section className="mt-4 p-3 surface rounded">
+        <h3 className="h6 mb-2">Motivation</h3>
+        <ul>
+          <li>Built to practice frontend development — a small project to learn React, styling, and UX.</li>
+          <li>Helps users quickly manipulate and format text for documents, social posts, and coding examples.</li>
+        </ul>
+      </section>
 
-        {/* Remove Extra Spaces */}
-        <div className="accordion-item" style={myStyle}>
-          <h2 className="accordion-header">
-            <button
-              className="accordion-button collapsed"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#collapseFour"
-              aria-expanded="false"
-              aria-controls="collapseFour"
-              style={myStyle}
-            >
-              Remove Extra Spaces
-            </button>
-          </h2>
-          <div
-            id="collapseFour"
-            className="accordion-collapse collapse"
-            data-bs-parent="#accordionExample"
-          >
-            <div className="accordion-body">
-              <strong>Eliminate unnecessary spaces from your text.</strong> This feature
-              is useful for cleaning up copied content or ensuring uniform spacing in
-              your document.
-            </div>
-          </div>
-        </div>
-      </div>
+      <section className="mt-4 p-3 surface rounded">
+        <h3 className="h6 mb-2">Technologies used</h3>
+        <p className="text-secondary mb-0">This app uses modern frontend tools: <strong>React</strong>, <strong>HTML</strong>, <strong>CSS</strong>, and plain <strong>JavaScript</strong>.</p>
+      </section>
 
-      {/* Comments Section */}
-      <div className="comments-section mt-4">
-        <h3 className="text-center">Comments</h3>
-        <div className="mb-3">
-          <textarea
-            className="form-control"
-            rows="3"
-            placeholder="Write your comment here..."
-            value={newComment}
-            onChange={(e) => setNewComment(e.target.value)}
-            style={{
-              backgroundColor: props.mode === 'dark' ? '#0f2a45' : 'white',
-              color: props.mode === 'dark' ? 'white' : '#042743',
-              border: props.mode === 'dark' ? '1px solid white' : '1px solid #ccc',
-            }}
-          ></textarea>
-          <button
-            className="btn btn-primary mt-2"
-            onClick={handleAddComment}
-            disabled={newComment.trim() === ''}
-          >
-            Add Comment
-          </button>
-        </div>
-        <div>
-          {comments.length > 0 ? (
-            <ul className="list-group">
-              {comments.map((comment, index) => (
-                <li
-                  key={index}
-                  className="list-group-item"
-                  style={{
-                    backgroundColor: props.mode === 'dark' ? '#0f2a45' : 'white',
-                    color: props.mode === 'dark' ? 'white' : '#042743',
-                    border: props.mode === 'dark' ? '1px solid white' : '1px solid #ccc',
-                  }}
-                >
-                  {comment}
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <p className="text-center">No comments yet. Be the first to comment!</p>
-          )}
-        </div>
-      </div>
+      <section className="mt-4 p-3 surface rounded">
+        <h3 className="h6 mb-2">Features summary</h3>
+        <ul className="features-summary">
+          <li>Uppercase</li>
+          <li>Lowercase</li>
+          <li>Capitalize Each Word</li>
+          <li>Sentence Case</li>
+          <li>Reverse text</li>
+          <li>Remove extra spaces</li>
+          <li>Word count &amp; character count</li>
+          <li>Copy to clipboard</li>
+        </ul>
+      </section>
+
+      <section className="mt-4 p-3 surface rounded">
+        <h3 className="h6 mb-2">About the developer</h3>
+        <p className="text-secondary mb-0">I'm a beginner frontend developer learning HTML, CSS, JavaScript and React. I enjoy building small useful tools that solve everyday problems and help me learn by doing.</p>
+      </section>
+
+      <section className="mt-4 p-3 surface rounded">
+        <h3 className="h6 mb-2">Future plans</h3>
+        <ul>
+          <li>Add a persistent dark mode preference</li>
+          <li>Introduce more text conversion utilities (e.g., slugify, remove punctuation)</li>
+          <li>Save text history or allow undo/redo</li>
+        </ul>
+      </section>
+
+      <section className="mt-4 p-3 surface rounded">
+        <h3 className="h6 mb-2">Contact (optional)</h3>
+        <p className="mb-1 text-secondary">If you'd like to contact me, replace the placeholders below with your real links.</p>
+        <ul className="contact-list mb-0">
+          <li>Email — <a href="mailto:you@example.com">you@example.com</a></li>
+          <li>GitHub — <a href="https://github.com/your-github" target="_blank" rel="noreferrer">github.com/your-github</a></li>
+          <li>LinkedIn — <a href="https://linkedin.com/in/your-linkedin" target="_blank" rel="noreferrer">linkedin.com/in/your-linkedin</a></li>
+        </ul>
+      </section>
+
     </div>
   );
 }

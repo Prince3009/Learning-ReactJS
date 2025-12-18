@@ -9,16 +9,34 @@ export default function Alert(props) {
   }
   
   return (
-    // Container div with fixed height to maintain layout consistency
-    <div style={{height : '65px'}}>       
+    // Keep consistent layout space for alerts
+    <div style={{minHeight : '65px'}}>
 
-    {/* Conditional rendering: display alert only if props.alert is not null */}
-    { props.alert &&  <div className={`alert alert-${props.alert.type} alert-dismissible fade show`} role="alert">
-      <strong>{captitalize(props.alert.type)}</strong>: {props.alert.msg}
+      {/* Show alert with ARIA live region for screen readers */}
+      {props.alert && (
+        <div
+          className={`alert alert-${props.alert.type} alert-dismissible fade show shadow-sm`}
+          role="status"
+          aria-live="polite"
+        >
+          <div className="d-flex align-items-start justify-content-between">
+            <div>
+              <strong>{captitalize(props.alert.type)}</strong>: {props.alert.msg}
+            </div>
 
-        {/* <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close"></button> */}
-      </div>}
-      </div>
+            {/* Optional close control — will call the provided handler if available */}
+            {props.onClose ? (
+              <button
+                type="button"
+                className="btn-close ms-3"
+                aria-label="Dismiss alert"
+                onClick={() => props.onClose()}
+              />
+            ) : null}
+          </div>
+        </div>
+      )}
+    </div>
     
   )
 }

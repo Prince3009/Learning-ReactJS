@@ -60,14 +60,18 @@
 
 
 
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { NavLink, Link } from 'react-router-dom';
+import ThemeToggle from './ThemeToggle';
+// icons (Heroicons library installed)
+import { HomeIcon, InformationCircleIcon, Cog6ToothIcon, EnvelopeIcon } from '@heroicons/react/24/outline';
 
 export default function Navbar(props) {
+  const [expanded, setExpanded] = useState(false);
   return (
     <>
       <nav
-        className={`navbar navbar-expand-lg navbar-${props.mode} bg-${props.mode} shadow-sm`}
+        className={`navbar navbar-expand-lg shadow-sm`}
         style={{
           padding: '0.8rem 1.5rem',
           transition: 'all 0.3s ease-in-out',
@@ -75,115 +79,121 @@ export default function Navbar(props) {
       >
         <div className="container-fluid">
           {/* Brand name styled with a modern font and color */}
-          <a
-            className="navbar-brand fw-bold"
-            href="/"
-            style={{
-              fontSize: '1.5rem',
-              color: props.mode === 'dark' ? '#fff' : '#042743',
-            }}
+          <Link
+            to="/"
+            className="navbar-brand fw-bold d-flex align-items-center"
+            onClick={() => setExpanded(false)}
+            style={{ fontSize: '1.4rem' }}
+            aria-label="TextChanger home"
           >
-            TextChanger
-          </a>
+            {/* small inline SVG mark */}
+            <svg
+              width="28"
+              height="28"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              style={{ marginRight: 8 }}
+              aria-hidden="true"
+            >
+              <rect x="1" y="1" width="22" height="22" rx="5" className="brand-mark" />
+              <path d="M7 12h10M7 8h6M7 16h10" stroke="#fff" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+            <span>TextChanger</span>
+          </Link>
 
           {/* Toggler for smaller screens */}
           <button
             className="navbar-toggler"
             type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarNav"
+            onClick={() => setExpanded(!expanded)}
             aria-controls="navbarNav"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
+            aria-expanded={expanded}
+            aria-label={expanded ? 'Close navigation menu' : 'Open navigation menu'}
           >
-            <span className="navbar-toggler-icon"></span>
+            <span className="navbar-toggler-icon" />
           </button>
 
           {/* Navigation links */}
-          <div className="collapse navbar-collapse" id="navbarNav">
+          <div className={`collapse navbar-collapse ${expanded ? 'show' : ''}`} id="navbarNav">
             <ul className="navbar-nav ms-auto align-items-center">
               <li className="nav-item">
-                <Link
-                  className="nav-link"
+                <NavLink
                   to="/"
-                  style={{
-                    color: props.mode === 'dark' ? '#f8f9fa' : '#042743',
-                    fontWeight: '500',
-                    transition: 'color 0.2s ease',
-                  }}
+                  end
+                  onClick={() => setExpanded(false)}
+                  className={({ isActive }) => `nav-link d-flex align-items-center nav-item-with-tooltip ${isActive ? 'active' : ''}`}
+                  style={{ fontWeight: '500', transition: 'color 0.12s ease' }}
+                  title="Home"
                 >
-                  Home
-                </Link>
+                  <span className="icon-wrapper me-2" tabIndex={0} aria-hidden="false" role="img" aria-label="Home icon">
+                    <HomeIcon className="nav-icon" aria-hidden="true" />
+                    <span className="tooltip">Home</span>
+                  </span>
+                  <span>Home</span>
+                </NavLink>
               </li>
               <li className="nav-item">
-                <Link
-                  className="nav-link"
+                <NavLink
                   to="/about"
-                  style={{
-                    color: props.mode === 'dark' ? '#f8f9fa' : '#042743',
-                    fontWeight: '500',
-                    transition: 'color 0.2s ease',
-                  }}
+                  onClick={() => setExpanded(false)}
+                  className={({ isActive }) => `nav-link d-flex align-items-center nav-item-with-tooltip ${isActive ? 'active' : ''}`}
+                  style={{ fontWeight: '500', transition: 'color 0.12s ease' }}
+                  title="About"
                 >
-                  About
-                </Link>
+                  <span className="icon-wrapper me-2" tabIndex={0} aria-hidden="false" role="img" aria-label="About icon">
+                    <InformationCircleIcon className="nav-icon" aria-hidden="true" />
+                    <span className="tooltip">About</span>
+                  </span>
+                  <span>About</span>
+                </NavLink>
               </li>
               <li className="nav-item">
-                <a
-                  className="nav-link"
-                  href="/"
-                  style={{
-                    color: props.mode === 'dark' ? '#f8f9fa' : '#042743',
-                    fontWeight: '500',
-                    transition: 'color 0.2s ease',
-                  }}
+                <NavLink
+                  to="/services"
+                  onClick={() => setExpanded(false)}
+                  className={({ isActive }) => `nav-link d-flex align-items-center nav-item-with-tooltip ${isActive ? 'active' : ''}`}
+                  style={{ fontWeight: '500', transition: 'color 0.12s ease' }}
+                  title="Services"
                 >
-                  Services
-                </a>
+                  <span className="icon-wrapper me-2" tabIndex={0} aria-hidden="false" role="img" aria-label="Services icon">
+                    <Cog6ToothIcon className="nav-icon" aria-hidden="true" />
+                    <span className="tooltip">Services</span>
+                  </span>
+                  <span>Services</span>
+                </NavLink>
               </li>
               <li className="nav-item">
-                <a
-                  className="nav-link"
-                  href="/"
-                  style={{
-                    color: props.mode === 'dark' ? '#f8f9fa' : '#042743',
-                    fontWeight: '500',
-                    transition: 'color 0.2s ease',
-                  }}
+                <NavLink
+                  to="/contact"
+                  onClick={() => setExpanded(false)}
+                  className={({ isActive }) => `nav-link d-flex align-items-center nav-item-with-tooltip ${isActive ? 'active' : ''}`}
+                  style={{ fontWeight: '500', transition: 'color 0.12s ease' }}
+                  title="Contact"
                 >
-                  Contact
-                </a>
+                  <span className="icon-wrapper me-2" tabIndex={0} aria-hidden="false" role="img" aria-label="Contact icon">
+                    <EnvelopeIcon className="nav-icon" aria-hidden="true" />
+                    <span className="tooltip">Contact</span>
+                  </span>
+                  <span>Contact</span>
+                </NavLink>
               </li>
             </ul>
           </div>
 
           {/* Theme switcher */}
-          <div
-            className={`form-check form-switch ms-3 text-${props.mode === 'light' ? 'dark' : 'light'
-              }`}
-          >
-            <input
-              className="form-check-input"
-              onClick={props.toggleMode}
-              type="checkbox"
-              role="switch"
-              id="flexSwitchCheckDefault"
-              style={{
-                transform: 'scale(1.2)',
-                cursor: 'pointer',
-              }}
-            />
-            <label
-              className="form-check-label ms-1"
-              htmlFor="flexSwitchCheckDefault"
-              style={{
-                fontSize: '0.9rem',
-                fontWeight: '500',
-              }}
-            >
-              Enable Dark Mode
-            </label>
+          <div className="ms-3" role="group" aria-label="Theme controls">
+            <ThemeToggle />
           </div>
+          {/* Primary CTA — visible on medium+ screens, tucked into mobile menu on small */}
+          <Link
+            to="/"
+            onClick={() => setExpanded(false)}
+            className="btn btn-sm btn-primary ms-3 d-none d-md-inline-flex align-items-center"
+            aria-label="Try TextChanger"
+          >
+            Try now
+          </Link>
         </div>
       </nav>
     </>
